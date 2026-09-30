@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PackagePulse Studio — Dependency Health & License Auditor</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="brand">
+        <div class="brand-logo">💓</div>
+        <div class="brand-text">
+          <h1>PackagePulse <span class="badge version">v1.0.0</span></h1>
+          <p class="subtitle" id="projectSub">Zero-Dependency Package Health & License Compliance Studio</p>
+        </div>
+      </div>
+      
+      <div class="header-actions">
+        <div class="health-gauge">
+          <span class="health-label">Project Health</span>
+          <span class="health-val" id="healthScore">--</span>
+        </div>
+        <button class="btn btn-secondary" id="btnRefresh">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/></svg>
+          Re-Analyze
+        </button>
+      </div>
+    </header>
+
+    <!-- Stat Metric Cards -->
+    <section class="stats-grid">
+      <div class="stat-card">
+        <span class="stat-title">Total Dependencies</span>
+        <span class="stat-value" id="statTotal">0</span>
+        <span class="stat-sub">prod, dev & peer</span>
+      </div>
+      <div class="stat-card stat-success">
+        <span class="stat-title">Permissive (Safe)</span>
+        <span class="stat-value" id="statPermissive">0</span>
+        <span class="stat-sub">MIT, Apache, BSD, ISC</span>
+      </div>
+      <div class="stat-card stat-danger">
+        <span class="stat-title">Copyleft Risks</span>
+        <span class="stat-value" id="statCopyleft">0</span>
+        <span class="stat-sub">GPL, AGPL, SSPL, BSL</span>
+      </div>
+      <div class="stat-card stat-warning">
+        <span class="stat-title">Major Version Drift</span>
+        <span class="stat-value" id="statOutdated">0</span>
+        <span class="stat-sub">Requires major migration</span>
+      </div>
+    </section>
+
+    <!-- Toolbar: Search & Filters -->
+    <div class="toolbar">
+      <div class="search-box">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        <input type="text" id="searchInput" placeholder="Search dependencies or licenses...">
+      </div>
+
+      <div class="filter-group">
+        <select id="tierSelect" class="select-box">
+          <option value="all">All License Tiers</option>
+          <option value="permissive">Permissive Only (Safe)</option>
+          <option value="copyleft">Copyleft Risks Only</option>
+          <option value="unknown">Unknown / Missing Only</option>
+        </select>
+
+        <select id="typeSelect" class="select-box">
+          <option value="all">All Types</option>
+          <option value="prod">Production (deps)</option>
+          <option value="dev">Development (devDeps)</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Table Container -->
+    <div class="table-container">
+      <table class="deps-table">
+        <thead>
+          <tr>
+            <th style="width: 25%">Package Name</th>
+            <th style="width: 10%">Type</th>
+            <th style="width: 18%">License Tier</th>
+            <th style="width: 12%">Installed</th>
+            <th style="width: 12%">Latest npm</th>
+            <th style="width: 11%">Disk Footprint</th>
+            <th style="width: 12%">Status</th>
+          </tr>
+        </thead>
+        <tbody id="depsTableBody">
+          <tr>
+            <td colspan="7" class="loading-cell">Analyzing project dependencies...</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <div>PackagePulse &bull; Zero External Dependencies &bull; Running on Node.js</div>
+      <div class="footer-links">
+        <a href="https://github.com/mahdyarmonfared/package-pulse" target="_blank" rel="noopener">GitHub Repository</a>
+      </div>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
