@@ -1,0 +1,35 @@
+{
+  "name": "package-pulse",
+  "version": "1.0.0",
+  "description": "Zero-dependency npm package health analyzer, license compliance scanner, and visual studio.",
+  "main": "src/core/index.js",
+  "bin": {
+    "pulse": "./bin/package-pulse.js",
+    "package-pulse": "./bin/package-pulse.js"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.js",
+    "start": "node bin/package-pulse.js ui",
+    "audit": "node bin/package-pulse.js audit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mahdyarmonfared/package-pulse.git"
+  },
+  "keywords": [
+    "npm",
+    "package-json",
+    "license-checker",
+    "outdated",
+    "dependency-analyzer",
+    "security",
+    "cli",
+    "developer-tools",
+    "compliance"
+  ],
+  "author": "Mahdyar Monfared",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
